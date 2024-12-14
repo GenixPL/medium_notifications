@@ -1,11 +1,29 @@
 {
   "project_info": {
     "project_number": "...",
-    "project_id": "medium-notifications-a1df9",
+    "project_id": "medium-notifications-e0ad8",
     "storage_bucket": "..."
   },
   "client": [
-    "..."
+    {
+      "client_info": {
+        "mobilesdk_app_id": "...",
+        "android_client_info": {
+          "package_name": "com.genix.notifications_example"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "..."
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
   ],
   "configuration_version": "1"
 }

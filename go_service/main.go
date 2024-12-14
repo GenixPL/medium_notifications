@@ -27,7 +27,7 @@ func main() {
 	http.HandleFunc("/poke", func(writer http.ResponseWriter, request *http.Request) {
 		opt := option.WithCredentialsFile("firebase_key.json")
 		config := &firebase.Config{
-			ProjectID: "medium-notifications-a1df9",
+			ProjectID: "medium-notifications-e0ad8",
 		}
 		firebaseApp, err := firebase.NewApp(context.Background(), config, opt)
 		if err != nil {

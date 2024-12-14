@@ -101,7 +101,7 @@ class MainActivity : ComponentActivity() {
                                 }
                             },
                         ) {
-                            Text("send")
+                            Text("send token to local service (:8080/token)")
                         }
                     }
                 }
