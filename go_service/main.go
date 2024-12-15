@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"io"
 	"net/http"
 
@@ -14,8 +15,9 @@ func main() {
 	tokens := []string{}
 
 	http.HandleFunc("/token", func(writer http.ResponseWriter, request *http.Request) {
-		bytedata, readErr := io.ReadAll(request.Body)
-		if readErr != nil {
+		bytedata, err := io.ReadAll(request.Body)
+		if err != nil {
+			fmt.Println("token, read error:", err)
 			return
 		}
 
@@ -27,20 +29,22 @@ func main() {
 	http.HandleFunc("/poke", func(writer http.ResponseWriter, request *http.Request) {
 		opt := option.WithCredentialsFile("firebase_key.json")
 		config := &firebase.Config{
-			ProjectID: "medium-notifications-e0ad8",
+			ProjectID: "medium-notifications-ae40e",
 		}
 		firebaseApp, err := firebase.NewApp(context.Background(), config, opt)
 		if err != nil {
+			fmt.Println("poke, get app error:", err)
 			return
 		}
 
 		messagingClient, err := firebaseApp.Messaging(context.Background())
 		if err != nil {
+			fmt.Println("poke, get messaging error:", err)
 			return
 		}
 
 		for _, deviceToken := range tokens {
-			messagingClient.Send(
+			_, err := messagingClient.Send(
 				context.Background(),
 				&messaging.Message{
 					Token: deviceToken,
@@ -50,6 +54,9 @@ func main() {
 					},
 				},
 			)
+			if err != nil {
+				fmt.Println("poke, send error:", err)
+			}
 		}
 	})
 
